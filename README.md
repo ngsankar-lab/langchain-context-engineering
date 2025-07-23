@@ -6,7 +6,7 @@ A comprehensive template for building LangChain applications using Context Engin
 
 ```bash
 # 1. Clone this template
-git clone https://github.com/ngsankar-lab/langchain-context-engineering.git
+git clone https://github.com/your-username/langchain-context-engineering.git
 cd langchain-context-engineering
 
 # 2. Set up your environment
@@ -28,20 +28,23 @@ cp .env.example .env
 # Edit INITIAL.md with your LangChain feature requirements
 
 # 7. Generate a comprehensive LangChain Implementation Plan (LIP)
-python generate_lip.py INITIAL.md
+# In Claude Code, run:
+/generate-lip INITIAL.md
 
 # 8. Execute the LIP to implement your feature
-python execute_lip.py LIPs/your-feature-name.md
+# In Claude Code, run:
+/execute-lip LIPs/your-feature-name.md
 ```
 
 ## Template Structure
 
 ```
 langchain-context-engineering/
-├── scripts/
-│   ├── generate_lip.py          # Generates LangChain Implementation Plans
-│   ├── execute_lip.py           # Executes LIPs to implement features
-│   └── validate_langchain.py    # Validates LangChain implementations
+├── .claude/
+│   ├── commands/
+│   │   ├── generate-lip.md      # Generates LangChain Implementation Plans
+│   │   └── execute-lip.md       # Executes LIPs to implement features
+│   └── settings.local.json      # Claude Code permissions
 ├── LIPs/                        # LangChain Implementation Plans
 │   ├── templates/
 │   │   └── lip_base.md         # Base template for LIPs
@@ -52,13 +55,15 @@ langchain-context-engineering/
 │   ├── rag_chain.py            # RAG implementation example
 │   ├── agent_chain.py          # Agent-based chain example
 │   ├── memory_chain.py         # Conversation memory example
-│   └── tools/
-│       ├── custom_tool.py      # Custom tool implementation
-│       └── web_search_tool.py  # Web search tool example
-├── tests/                      # Test patterns for LangChain
-│   ├── test_chains.py
-│   ├── test_agents.py
-│   └── conftest.py
+│   ├── tools/
+│   │   ├── README.md           # Tools documentation and patterns
+│   │   ├── custom_tool.py      # Custom tool implementations
+│   │   └── web_search_tool.py  # Web search tool examples
+│   └── tests/                  # Test patterns for LangChain
+│       ├── README.md           # Testing documentation
+│       ├── test_chains.py      # Chain testing patterns
+│       ├── test_agents.py      # Agent testing patterns
+│       └── conftest.py         # Pytest fixtures and configuration
 ├── LANGCHAIN_RULES.md          # Global rules for LangChain development
 ├── INITIAL.md                  # Template for feature requests
 ├── INITIAL_EXAMPLE.md          # Example LangChain feature request
@@ -146,10 +151,10 @@ Edit `INITIAL.md` to describe your LangChain feature:
 
 ### 4. Generate LangChain Implementation Plan (LIP)
 
-Run the generator:
+Run the generator in Claude Code:
 
 ```bash
-python scripts/generate_lip.py INITIAL.md
+/generate-lip INITIAL.md
 ```
 
 This will:
@@ -160,10 +165,10 @@ This will:
 
 ### 5. Execute the Implementation
 
-Run the executor:
+Run the executor in Claude Code:
 
 ```bash
-python scripts/execute_lip.py LIPs/your-feature-name.md
+/execute-lip LIPs/your-feature-name.md
 ```
 
 The system will:
@@ -293,6 +298,54 @@ tiktoken>=0.5.0
 python-dotenv>=1.0.0
 pytest>=7.0.0
 pytest-asyncio>=0.21.0
+pytest-cov>=4.0.0
+requests>=2.28.0
+```
+
+## 🔧 Setup Requirements
+
+### Installation
+```bash
+# Clone the template
+git clone https://github.com/your-username/langchain-context-engineering.git
+cd langchain-context-engineering
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your API keys
+```
+
+### Required Environment Variables
+```bash
+# .env file
+OPENAI_API_KEY=your_openai_api_key
+ANTHROPIC_API_KEY=your_anthropic_api_key  # Optional
+LANGCHAIN_TRACING_V2=true  # Optional, for LangSmith tracing
+LANGCHAIN_API_KEY=your_langsmith_key  # Optional
+
+# Vector Store Configuration (if using)
+PINECONE_API_KEY=your_pinecone_key_here
+PINECONE_ENVIRONMENT=your_pinecone_env
+
+# Testing Configuration
+PYTEST_FAST_MODE=false
+PYTEST_ALLOW_API_TESTS=true
+PYTEST_DEBUG=false
+```
+
+### Verify Installation
+```bash
+# Test basic functionality
+python examples/basic_chain.py
+
+# Run the test suite
+pytest examples/tests/ -v
+
+# Check specific components
+python -c "import langchain; print('LangChain installed successfully')"
 ```
 
 ## Advanced Features
@@ -369,4 +422,4 @@ The template includes comprehensive testing patterns:
 
 ## License
 
-MIT License - feel free to use this template for your LangChain projects!# langchain-context-engineering
+MIT License - feel free to use this template for your LangChain projects!
